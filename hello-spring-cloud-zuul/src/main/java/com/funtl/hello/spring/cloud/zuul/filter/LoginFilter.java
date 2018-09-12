@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -35,6 +36,7 @@ public class LoginFilter extends ZuulFilter {
      */
     @Override
     public String filterType() {
+
         return "pre";
     }
 
@@ -44,6 +46,7 @@ public class LoginFilter extends ZuulFilter {
      */
     @Override
     public int filterOrder() {
+
         return 0;
     }
 
@@ -53,6 +56,7 @@ public class LoginFilter extends ZuulFilter {
      */
     @Override
     public boolean shouldFilter() {
+
         return true;
     }
 
@@ -72,6 +76,9 @@ public class LoginFilter extends ZuulFilter {
             context.setSendZuulResponse(false);
             context.setResponseStatusCode(401);
             try {
+
+//                HttpServletResponse response = currentContext.getResponse();
+//                response.setContentType("text/html:charset=utf-8");
                 context.getResponse().getWriter().write("Token is empty");
             } catch (IOException e) {
             }
